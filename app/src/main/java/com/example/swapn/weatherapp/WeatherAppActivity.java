@@ -24,7 +24,7 @@ public class WeatherAppActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather_app);
 
         AsyncThread weatherThread = new AsyncThread();
-        weatherThread.execute();
+
 
     }
 

@@ -195,7 +195,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 double temp = converter(Otemp.getDouble("temp"));
                 JSONObject Cdescription = new JSONObject(String.valueOf(currentWeather.getJSONArray("weather").get(0)));
                 setImage(mainImage,Cdescription.getString("icon"));
-                maintextView.setText(temp +" F and "+ Cdescription.getString("description"));
+                maintextView.setText(temp +" °F and "+ Cdescription.getString("description"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -204,8 +204,8 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj1 = futureWeather.getJSONArray("list").getJSONObject(0);
                 double max1 = converter(rootObj1.getJSONObject("main").getDouble("temp_max"));
                 double min1 = converter(rootObj1.getJSONObject("main").getDouble("temp_min"));
-                text1T.setText(timefixer(rootObj1.getString("dt_txt"))+"\nhigh: "+ max1+" F");
-                text1B.setText("Low: " + min1+" F\n description:\n"+ rootObj1.getJSONArray("weather").getJSONObject(0).getString("description"));
+                text1T.setText(timefixer(rootObj1.getString("dt_txt"))+"\n"+ max1+" °F");
+                text1B.setText(min1+" °F\n "+ rootObj1.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image1,rootObj1.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -215,8 +215,8 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj2 = futureWeather.getJSONArray("list").getJSONObject(1);
                 double max2 = converter(rootObj2.getJSONObject("main").getDouble("temp_max"));
                 double min2 = converter(rootObj2.getJSONObject("main").getDouble("temp_min"));
-                text2T.setText(timefixer(rootObj2.getString("dt_txt"))+"\nhigh: "+ max2+" F");
-                text2B.setText("Low: " + min2+" F\n description:\n"+ rootObj2.getJSONArray("weather").getJSONObject(0).getString("description"));
+                text2T.setText(timefixer(rootObj2.getString("dt_txt"))+"\n"+ max2+" °F");
+                text2B.setText(min2+" °F\n "+ rootObj2.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image2,rootObj2.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -226,8 +226,8 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj3 = futureWeather.getJSONArray("list").getJSONObject(2);
                 double max3 = converter(rootObj3.getJSONObject("main").getDouble("temp_max"));
                 double min3 = converter(rootObj3.getJSONObject("main").getDouble("temp_min"));
-                text3T.setText(timefixer(rootObj3.getString("dt_txt"))+"\nhigh: "+ max3+" F");
-                text3B.setText("Low: " + min3+" F\n description:\n"+ rootObj3.getJSONArray("weather").getJSONObject(0).getString("description"));
+                text3T.setText(timefixer(rootObj3.getString("dt_txt"))+"\n"+ max3+" °F");
+                text3B.setText(min3+" °F\n "+ rootObj3.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image3,rootObj3.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -237,8 +237,8 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj4 = futureWeather.getJSONArray("list").getJSONObject(3);
                 double max4 = converter(rootObj4.getJSONObject("main").getDouble("temp_max"));
                 double min4 = converter(rootObj4.getJSONObject("main").getDouble("temp_min"));
-                text4T.setText(timefixer(rootObj4.getString("dt_txt"))+"\nhigh: "+ max4+" F");
-                text4B.setText("Low: " + min4+" F\n description:\n"+ rootObj4.getJSONArray("weather").getJSONObject(0).getString("description"));
+                text4T.setText(timefixer(rootObj4.getString("dt_txt"))+"\n"+ max4+" °F");
+                text4B.setText(min4+" °F\n "+ rootObj4.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image4,rootObj4.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -248,8 +248,8 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj5 = futureWeather.getJSONArray("list").getJSONObject(4);
                 double max5 = converter(rootObj5.getJSONObject("main").getDouble("temp_max"));
                 double min5 = converter(rootObj5.getJSONObject("main").getDouble("temp_min"));
-                text5T.setText(timefixer(rootObj5.getString("dt_txt"))+"\nhigh: "+ max5+" F");
-                text5B.setText("Low: " + min5+" F\n description:\n"+ rootObj5.getJSONArray("weather").getJSONObject(0).getString("description"));
+                text5T.setText(timefixer(rootObj5.getString("dt_txt"))+"\n"+ max5+" °F");
+                text5B.setText(min5+" °F\n "+ rootObj5.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image5,rootObj5.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (JSONException e) {
                 e.printStackTrace();

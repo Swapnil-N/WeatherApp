@@ -37,7 +37,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
             android:text="Description:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/imageView2"
@@ -56,7 +60,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
             android:text="Description:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView1"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/imageView1"
@@ -75,7 +83,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
             android:text="Description:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView4"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="@+id/imageView4"
@@ -94,7 +106,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
             android:text="Description:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView5"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="@+id/imageView5"
@@ -113,7 +129,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
             android:text="Description:"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="@+id/imageView3"
@@ -193,33 +213,33 @@
 
     <LinearLayout
         android:id="@+id/linearLayout_weather"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_width="370dp"
+        android:layout_height="74dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.828">
+        app:layout_constraintVertical_bias="0.82">
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -230,15 +250,14 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -249,15 +268,14 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toRightOf="@+id/imageView1"
@@ -268,15 +286,14 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toRightOf="@+id/imageView1"
@@ -287,15 +304,14 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.093"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -307,7 +323,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout_TopText"
-        android:layout_width="360dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -318,41 +334,61 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.669">
+        app:layout_constraintVertical_bias="0.71000004">
 
         <TextView
             android:id="@+id/textView1T"
-            android:layout_width="72dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:fontFamily="sans-serif-condensed"
+            android:text="Hourly"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView2T"
-            android:layout_width="72dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:fontFamily="sans-serif-condensed"
+            android:text="forcast"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView3T"
-            android:layout_width="72dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:fontFamily="sans-serif-condensed"
+            android:text="for the"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView4T"
-            android:layout_width="72dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:fontFamily="sans-serif-condensed"
+            android:text="next"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView5T"
-            android:layout_width="72dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:fontFamily="sans-serif-condensed"
+            android:text="12 hours"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

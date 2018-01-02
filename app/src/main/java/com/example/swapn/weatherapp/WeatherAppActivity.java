@@ -1,6 +1,14 @@
 package com.example.swapn.weatherapp;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,11 +23,14 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
+import java.util.Locale;
 
 
 public class WeatherAppActivity extends AppCompatActivity {
@@ -52,6 +63,9 @@ public class WeatherAppActivity extends AppCompatActivity {
     TextView text4B;
     TextView text5B;
 
+    Button geoButton;
+    TextView geoText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,17 +79,17 @@ public class WeatherAppActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            zipcode = editText.getText().toString();
-            AsyncThread weatherThread = new AsyncThread();
-            weatherThread.execute();
+                zipcode = editText.getText().toString();
+                AsyncThread weatherThread = new AsyncThread();
+                weatherThread.execute();
             }
         });
 
-        text1T = (TextView)findViewById(R.id.textView1T);
-        text2T = (TextView)findViewById(R.id.textView2T);
-        text3T = (TextView)findViewById(R.id.textView3T);
-        text4T = (TextView)findViewById(R.id.textView4T);
-        text5T = (TextView)findViewById(R.id.textView5T);
+        text1T = (TextView) findViewById(R.id.textView1T);
+        text2T = (TextView) findViewById(R.id.textView2T);
+        text3T = (TextView) findViewById(R.id.textView3T);
+        text4T = (TextView) findViewById(R.id.textView4T);
+        text5T = (TextView) findViewById(R.id.textView5T);
 
         image1 = (ImageView) findViewById(R.id.imageView1);
         image2 = (ImageView) findViewById(R.id.imageView2);
@@ -83,11 +97,54 @@ public class WeatherAppActivity extends AppCompatActivity {
         image4 = (ImageView) findViewById(R.id.imageView4);
         image5 = (ImageView) findViewById(R.id.imageView5);
 
-        text1B = (TextView)findViewById(R.id.textView1B);
-        text2B = (TextView)findViewById(R.id.textView2B);
-        text3B = (TextView)findViewById(R.id.textView3B);
-        text4B = (TextView)findViewById(R.id.textView4B);
-        text5B = (TextView)findViewById(R.id.textView5B);
+        text1B = (TextView) findViewById(R.id.textView1B);
+        text2B = (TextView) findViewById(R.id.textView2B);
+        text3B = (TextView) findViewById(R.id.textView3B);
+        text4B = (TextView) findViewById(R.id.textView4B);
+        text5B = (TextView) findViewById(R.id.textView5B);
+
+        geoText = (TextView) findViewById(R.id.id_geo_text);
+        geoButton = (Button) findViewById(R.id.id_geo_button);
+        geoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+                double latitude = 45.5;
+                double longitude = -90;
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    ActivityCompat.requestPermissions(this, new String[] {
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION },as );
+
+                    ActivityCompat.requestPermissions(thisActivity,
+                            new String[]{Manifest.permission.READ_CONTACTS},
+                            MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                    //return;
+                }
+                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                longitude = location.getLongitude();
+                latitude = location.getLatitude();
+                Log.d("asdf","asdf");
+
+                Geocoder geocoder = new Geocoder(getApplicationContext(),Locale.getDefault());
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                    text1T.setText(addresses.get(0).getPostalCode());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
     }
 

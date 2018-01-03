@@ -1,6 +1,7 @@
 package com.example.swapn.weatherapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -8,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +40,8 @@ public class WeatherAppActivity extends AppCompatActivity {
 
     JSONObject currentWeather;
     JSONObject futureWeather;
+
+    Activity activity = this;
 
     EditText editText;
     Button button;
@@ -114,31 +119,21 @@ public class WeatherAppActivity extends AppCompatActivity {
                 double longitude = -90;
 
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    ActivityCompat.requestPermissions(this, new String[] {
-                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION },as );
 
-                    ActivityCompat.requestPermissions(thisActivity,
-                            new String[]{Manifest.permission.READ_CONTACTS},
-                            MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-                    //return;
+                    ActivityCompat.requestPermissions(activity, new String[] {
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION },10);
+
                 }
+
                 Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 longitude = location.getLongitude();
                 latitude = location.getLatitude();
-                Log.d("asdf","asdf");
 
                 Geocoder geocoder = new Geocoder(getApplicationContext(),Locale.getDefault());
                 try {
                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                    text1T.setText(addresses.get(0).getPostalCode());
+                    editText.setText(addresses.get(0).getPostalCode());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -228,6 +223,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 currentWeather = new JSONObject(bufferedReader1.readLine());
             } catch (Exception e) {
                 e.printStackTrace();
+          //      Toast.makeText(getApplicationContext(),"Not a valid zipcode",Toast.LENGTH_SHORT).show();
             }
 
             try {
@@ -239,6 +235,8 @@ public class WeatherAppActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+
 
             return null;
         }

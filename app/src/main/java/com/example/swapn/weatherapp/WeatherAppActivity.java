@@ -1,7 +1,6 @@
 package com.example.swapn.weatherapp;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -22,12 +21,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -41,8 +38,6 @@ public class WeatherAppActivity extends AppCompatActivity {
 
     JSONObject currentWeather;
     JSONObject futureWeather;
-
-    Activity activity = this;
 
     EditText editText;
     Button button;
@@ -69,7 +64,13 @@ public class WeatherAppActivity extends AppCompatActivity {
     TextView text4B;
     TextView text5B;
 
+    TextView hourlyText;
+
     ImageButton geoButton;
+    static final int REQUEST_LOCATION = 1;
+    LocationManager locationManager;
+    double latitude;
+    double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class WeatherAppActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.id_button);
         maintextView = (TextView) findViewById(R.id.id_textView);
         mainImage = (ImageView) findViewById(R.id.CimageView);
+
+        hourlyText = (TextView) findViewById(R.id.hourlyText);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,31 +115,16 @@ public class WeatherAppActivity extends AppCompatActivity {
         geoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-                double latitude = 40.4;
-                double longitude = -74.5;
-
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                    ActivityCompat.requestPermissions(activity, new String[] {
-                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION },10);
-
-                }
-
-                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (location != null) {
-                    longitude = location.getLongitude();
-                    latitude = location.getLatitude();
-                    Log.d("asdf","asdf");
-                }
+                locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                getLocation();
 
                 Geocoder geocoder = new Geocoder(getApplicationContext(),Locale.getDefault());
                 try {
                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                     editText.setText(addresses.get(0).getPostalCode());
                 } catch (Exception e) {
+                    Toast.makeText(WeatherAppActivity.this,"Unable to acquire location",Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
@@ -144,6 +132,35 @@ public class WeatherAppActivity extends AppCompatActivity {
 
 
     }
+
+    void getLocation(){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+        PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_LOCATION);
+        }
+        else{
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            if (location != null){
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case REQUEST_LOCATION:
+                getLocation();
+                break;
+        }
+    }
+
 
     public static double converter(double num){
         return Math.round((num*(9.0/5.0) - 459.67)*10.0)/10.0 ;
@@ -225,7 +242,11 @@ public class WeatherAppActivity extends AppCompatActivity {
                 currentWeather = new JSONObject(bufferedReader1.readLine());
             } catch (Exception e) {
                 e.printStackTrace();
-          //      Toast.makeText(getApplicationContext(),"Not a valid zipcode",Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(WeatherAppActivity.this, "Invalid zipcode", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             try {
@@ -252,8 +273,9 @@ public class WeatherAppActivity extends AppCompatActivity {
                 double temp = converter(Otemp.getDouble("temp"));
                 JSONObject Cdescription = new JSONObject(String.valueOf(currentWeather.getJSONArray("weather").get(0)));
                 setImage(mainImage,Cdescription.getString("icon"));
-                maintextView.setText(temp +" °F and "+ Cdescription.getString("description"));
-            } catch (JSONException e) {
+                maintextView.setText("Current weather in "+currentWeather.getString("name")+"\n"+temp +" °F with "+ Cdescription.getString("description"));
+                hourlyText.setText("Hourly    Forecast");
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -264,7 +286,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 text1T.setText(timefixer(rootObj1.getString("dt_txt"))+"\n"+ max1+" °F");
                 text1B.setText(min1+" °F\n "+ rootObj1.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image1,rootObj1.getJSONArray("weather").getJSONObject(0).getString("icon"));
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -275,7 +297,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 text2T.setText(timefixer(rootObj2.getString("dt_txt"))+"\n"+ max2+" °F");
                 text2B.setText(min2+" °F\n "+ rootObj2.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image2,rootObj2.getJSONArray("weather").getJSONObject(0).getString("icon"));
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -286,7 +308,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 text3T.setText(timefixer(rootObj3.getString("dt_txt"))+"\n"+ max3+" °F");
                 text3B.setText(min3+" °F\n "+ rootObj3.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image3,rootObj3.getJSONArray("weather").getJSONObject(0).getString("icon"));
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -297,7 +319,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 text4T.setText(timefixer(rootObj4.getString("dt_txt"))+"\n"+ max4+" °F");
                 text4B.setText(min4+" °F\n "+ rootObj4.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image4,rootObj4.getJSONArray("weather").getJSONObject(0).getString("icon"));
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -308,7 +330,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 text5T.setText(timefixer(rootObj5.getString("dt_txt"))+"\n"+ max5+" °F");
                 text5B.setText(min5+" °F\n "+ rootObj5.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image5,rootObj5.getJSONArray("weather").getJSONObject(0).getString("icon"));
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

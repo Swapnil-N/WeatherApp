@@ -71,6 +71,7 @@ public class WeatherAppActivity extends AppCompatActivity {
     LocationManager locationManager;
     double latitude;
     double longitude;
+    String[] bothURLs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,10 @@ public class WeatherAppActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 zipcode = editText.getText().toString();
+                bothURLs = new String[]{"http://api.openweathermap.org/data/2.5/weather?zip="+zipcode+"&APPID=5244998c89fd54420cc25028d86b55e8"
+                        ,"http://api.openweathermap.org/data/2.5/forecast?zip="+zipcode+"&APPID=5244998c89fd54420cc25028d86b55e8"};
                 AsyncThread weatherThread = new AsyncThread();
-                weatherThread.execute();
+                weatherThread.execute(bothURLs);
             }
         });
 
@@ -229,13 +232,13 @@ public class WeatherAppActivity extends AppCompatActivity {
     }
 
 
-    public class AsyncThread extends AsyncTask<Void,Void,Void>{
+    public class AsyncThread extends AsyncTask<String,Void,Void>{
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(String... strings) {
 
             try {
-                URL url1 = new URL("http://api.openweathermap.org/data/2.5/weather?zip="+zipcode+"&APPID=5244998c89fd54420cc25028d86b55e8");
+                URL url1 = new URL(strings[0]);
                 URLConnection urlConnection1 = url1.openConnection();
                 InputStream inputStream1 = urlConnection1.getInputStream();
                 BufferedReader bufferedReader1 = new BufferedReader(new InputStreamReader(inputStream1));
@@ -250,7 +253,7 @@ public class WeatherAppActivity extends AppCompatActivity {
             }
 
             try {
-                URL url2 = new URL("http://api.openweathermap.org/data/2.5/forecast?zip="+zipcode+"&APPID=5244998c89fd54420cc25028d86b55e8");
+                URL url2 = new URL(strings[1]);
                 URLConnection urlConnection2 = url2.openConnection();
                 InputStream inputStream2 = urlConnection2.getInputStream();
                 BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(inputStream2));

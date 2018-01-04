@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,8 +69,7 @@ public class WeatherAppActivity extends AppCompatActivity {
     TextView text4B;
     TextView text5B;
 
-    Button geoButton;
-    TextView geoText;
+    ImageButton geoButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,15 +108,14 @@ public class WeatherAppActivity extends AppCompatActivity {
         text4B = (TextView) findViewById(R.id.textView4B);
         text5B = (TextView) findViewById(R.id.textView5B);
 
-        geoText = (TextView) findViewById(R.id.id_geo_text);
-        geoButton = (Button) findViewById(R.id.id_geo_button);
+        geoButton = (ImageButton) findViewById(R.id.id_geo_button);
         geoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-                double latitude = 45.5;
-                double longitude = -90;
+                double latitude = 40.4;
+                double longitude = -74.5;
 
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -127,8 +126,11 @@ public class WeatherAppActivity extends AppCompatActivity {
                 }
 
                 Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                longitude = location.getLongitude();
-                latitude = location.getLatitude();
+                if (location != null) {
+                    longitude = location.getLongitude();
+                    latitude = location.getLatitude();
+                    Log.d("asdf","asdf");
+                }
 
                 Geocoder geocoder = new Geocoder(getApplicationContext(),Locale.getDefault());
                 try {

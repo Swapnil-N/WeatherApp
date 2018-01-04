@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:backgroundTintMode="screen"
     tools:context="com.example.swapn.weatherapp.WeatherAppActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout
         android:id="@+id/linearLayout_BottomText"
@@ -38,8 +40,8 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-condensed"
-            android:text="Description:"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView2"
@@ -61,8 +63,8 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-condensed"
-            android:text="Description:"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView1"
@@ -84,8 +86,8 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-condensed"
-            android:text="Description:"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView4"
@@ -107,8 +109,8 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-condensed"
-            android:text="Description:"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView5"
@@ -130,8 +132,8 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-condensed"
-            android:text="Description:"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
@@ -152,28 +154,32 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Weather"
+        android:text="Enter Zip Code For Weather"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.21" />
 
     <EditText
         android:id="@+id/id_editText"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
-        android:text="08810"
+        android:textColor="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02"
+        app:layout_constraintVertical_bias="0.059"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1" />
 
@@ -181,17 +187,18 @@
         android:id="@+id/id_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_light"
         android:text="Go"
+        android:textColor="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026"
+        app:layout_constraintVertical_bias="0.075"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.91" />
+        tools:layout_constraintTop_creator="1" />
 
     <ImageView
         android:id="@+id/CimageView"
@@ -204,12 +211,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:layout_constraintVertical_bias="0.402" />
 
     <LinearLayout
         android:id="@+id/linearLayout_weather"
@@ -245,8 +250,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.862"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintVertical_bias="0.862" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -263,8 +267,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/imageView1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.863"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintVertical_bias="0.863" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -281,8 +284,7 @@
             app:layout_constraintLeft_toRightOf="@+id/imageView1"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.866"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintVertical_bias="0.866" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -299,8 +301,7 @@
             app:layout_constraintLeft_toRightOf="@+id/imageView1"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.863"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintVertical_bias="0.863" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -317,8 +318,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/imageView1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.863"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:layout_constraintVertical_bias="0.863" />
     </LinearLayout>
 
     <LinearLayout
@@ -345,8 +345,8 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="Hourly"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -355,8 +355,8 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="forcast"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -365,8 +365,8 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="for the"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -375,8 +375,8 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="next"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -385,42 +385,31 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="12 hours"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/id_geo_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="84dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="Button"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:elevation="0dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.221"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.599" />
-
-    <TextView
-        android:id="@+id/id_geo_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.686"
-        app:layout_constraintVertical_bias="0.601" />
+        app:layout_constraintVertical_bias="0.06"
+        app:srcCompat="@drawable/locationmarker" />
 
 </android.support.constraint.ConstraintLayout>

@@ -43,6 +43,7 @@ public class WeatherAppActivity extends AppCompatActivity {
     Button button;
     TextView maintextView;
     ImageView mainImage;
+    TextView topText;
 
     String zipcode;
 
@@ -82,6 +83,7 @@ public class WeatherAppActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.id_button);
         maintextView = (TextView) findViewById(R.id.id_textView);
         mainImage = (ImageView) findViewById(R.id.CimageView);
+        topText = (TextView) findViewById(R.id.first_text);
 
         hourlyText = (TextView) findViewById(R.id.hourlyText);
 
@@ -205,7 +207,7 @@ public class WeatherAppActivity extends AppCompatActivity {
         if (string.equals("01d"))
             tempImage.setImageResource(R.drawable.clearsky01d);
         else if (string.equals("01n"))
-            tempImage.setImageResource(R.drawable.clearsky01d);
+            tempImage.setImageResource(R.drawable.clearsky01n);
         else if (string.equals("02d"))
             tempImage.setImageResource(R.drawable.fewclouds02d);
         else if (string.equals("02n"))
@@ -276,8 +278,9 @@ public class WeatherAppActivity extends AppCompatActivity {
                 double temp = converter(Otemp.getDouble("temp"));
                 JSONObject Cdescription = new JSONObject(String.valueOf(currentWeather.getJSONArray("weather").get(0)));
                 setImage(mainImage,Cdescription.getString("icon"));
-                maintextView.setText("Current weather in "+currentWeather.getString("name")+"\n"+temp +" °F with "+ Cdescription.getString("description"));
+                maintextView.setText(temp +" °F with "+ Cdescription.getString("description"));
                 hourlyText.setText("Hourly    Forecast");
+                topText.setText("Current weather in "+currentWeather.getString("name")+", N.J.");
             } catch (Exception e) {
                 e.printStackTrace();
             }

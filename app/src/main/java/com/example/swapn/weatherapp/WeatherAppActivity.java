@@ -30,8 +30,11 @@ import java.io.InputStreamReader;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class WeatherAppActivity extends AppCompatActivity {
@@ -73,6 +76,7 @@ public class WeatherAppActivity extends AppCompatActivity {
     double latitude;
     double longitude;
     String[] bothURLs;
+    String state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +132,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 try {
                     List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
                     editText.setText(addresses.get(0).getPostalCode());
+                    state = addresses.get(0).getAdminArea();
                 } catch (Exception e) {
                     Toast.makeText(WeatherAppActivity.this,"Unable to acquire location",Toast.LENGTH_LONG).show();
                     e.printStackTrace();
@@ -171,36 +176,14 @@ public class WeatherAppActivity extends AppCompatActivity {
         return Math.round((num*(9.0/5.0) - 459.67)*10.0)/10.0 ;
     }
 
-    public static String timefixer(String input){
-        //0,3,6,9,12,15,18,21
-        //7P, 10P, 1A, 4A, 7A, 10A, 1P, 4P
-        String hour = input.substring(11,13);
-        if (hour.equals("00")){
-            return "7:00 P.M.";
-        }
-        else if (hour.equals("03")){
-            return "10:00 P.M.";
-        }
-        else if (hour.equals("06")){
-            return "1:00 A.M.";
-        }
-        else if (hour.equals("09")){
-            return "4:00 A.M.";
-        }
-        else if (hour.equals("12")){
-            return "7:00 A.M.";
-        }
-        else if (hour.equals("15")){
-            return "10:00 A.M.";
-        }
-        else if (hour.equals("18")){
-            return "1:00 P.M.";
-        }
-        else if (hour.equals("21")){
-            return "4:00 P.M.";
-        }
+    public static String timefixer(Long input){
 
-        return "not a valid time";
+        Date date = new Date(input*1000L);
+        SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+        sdf.setTimeZone(TimeZone.getDefault());
+        String formattedDate = sdf.format(date);
+
+        return formattedDate;
     }
 
     public static void setImage(ImageView tempImage, String string){
@@ -230,7 +213,7 @@ public class WeatherAppActivity extends AppCompatActivity {
         else if (string.substring(0,2).equals("50"))
             tempImage.setImageResource(R.drawable.mist50d);
         else
-            tempImage.setImageResource(R.drawable.weathermeme);
+            tempImage.setImageResource(R.drawable.clearsky01d);
     }
 
 
@@ -289,7 +272,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj1 = futureWeather.getJSONArray("list").getJSONObject(0);
                 double max1 = converter(rootObj1.getJSONObject("main").getDouble("temp_max"));
                 double min1 = converter(rootObj1.getJSONObject("main").getDouble("temp_min"));
-                text1T.setText(timefixer(rootObj1.getString("dt_txt"))+"\n"+ max1+" °F");
+                text1T.setText(timefixer(rootObj1.getLong("dt"))+"\n"+ max1+" °F");
                 text1B.setText(min1+" °F\n "+ rootObj1.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image1,rootObj1.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (Exception e) {
@@ -300,7 +283,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj2 = futureWeather.getJSONArray("list").getJSONObject(1);
                 double max2 = converter(rootObj2.getJSONObject("main").getDouble("temp_max"));
                 double min2 = converter(rootObj2.getJSONObject("main").getDouble("temp_min"));
-                text2T.setText(timefixer(rootObj2.getString("dt_txt"))+"\n"+ max2+" °F");
+                text2T.setText(timefixer(rootObj2.getLong("dt"))+"\n"+ max2+" °F");
                 text2B.setText(min2+" °F\n "+ rootObj2.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image2,rootObj2.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (Exception e) {
@@ -311,7 +294,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj3 = futureWeather.getJSONArray("list").getJSONObject(2);
                 double max3 = converter(rootObj3.getJSONObject("main").getDouble("temp_max"));
                 double min3 = converter(rootObj3.getJSONObject("main").getDouble("temp_min"));
-                text3T.setText(timefixer(rootObj3.getString("dt_txt"))+"\n"+ max3+" °F");
+                text3T.setText(timefixer(rootObj3.getLong("dt"))+"\n"+ max3+" °F");
                 text3B.setText(min3+" °F\n "+ rootObj3.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image3,rootObj3.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (Exception e) {
@@ -322,7 +305,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj4 = futureWeather.getJSONArray("list").getJSONObject(3);
                 double max4 = converter(rootObj4.getJSONObject("main").getDouble("temp_max"));
                 double min4 = converter(rootObj4.getJSONObject("main").getDouble("temp_min"));
-                text4T.setText(timefixer(rootObj4.getString("dt_txt"))+"\n"+ max4+" °F");
+                text4T.setText(timefixer(rootObj4.getLong("dt"))+"\n"+ max4+" °F");
                 text4B.setText(min4+" °F\n "+ rootObj4.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image4,rootObj4.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (Exception e) {
@@ -333,7 +316,7 @@ public class WeatherAppActivity extends AppCompatActivity {
                 JSONObject rootObj5 = futureWeather.getJSONArray("list").getJSONObject(4);
                 double max5 = converter(rootObj5.getJSONObject("main").getDouble("temp_max"));
                 double min5 = converter(rootObj5.getJSONObject("main").getDouble("temp_min"));
-                text5T.setText(timefixer(rootObj5.getString("dt_txt"))+"\n"+ max5+" °F");
+                text5T.setText(timefixer(rootObj5.getLong("dt"))+"\n"+ max5+" °F");
                 text5B.setText(min5+" °F\n "+ rootObj5.getJSONArray("weather").getJSONObject(0).getString("description"));
                 setImage(image5,rootObj5.getJSONArray("weather").getJSONObject(0).getString("icon"));
             } catch (Exception e) {
